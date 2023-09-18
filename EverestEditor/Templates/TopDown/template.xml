@@ -1,0 +1,10 @@
+<GameTemplate xmlns="http://schemas.datacontract.org/2004/07/EverestEditor.ProjectBrowser" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Folders xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+		<a:string>.Everest</a:string>
+		<a:string>Resources</a:string>
+		<a:string>Scripts</a:string>
+	</Folders>
+	<ProjectFile>project.ev</ProjectFile>
+	<ProjectType>Top Down Project</ProjectType>
+	<TemplateName>TopDownApp</TemplateName>
+</GameTemplate>

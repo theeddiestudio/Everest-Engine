@@ -23,6 +23,12 @@ namespace EverestEditor.ProjectBrowser
         public NewProjectView()
         {
             InitializeComponent();
+
+            // give a default name to the project when no template is selected
+            if (templateName.Text == "")
+            {
+                templateName.Text = "ProjectApp";
+            }
         }
     }
 }
