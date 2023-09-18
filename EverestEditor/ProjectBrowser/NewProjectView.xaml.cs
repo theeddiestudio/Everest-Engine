@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EverestEditor.ProjectBrowser;
 
 namespace EverestEditor.ProjectBrowser
 {
@@ -25,10 +26,28 @@ namespace EverestEditor.ProjectBrowser
             InitializeComponent();
 
             // give a default name to the project when no template is selected
+            // not going to be used cause blank project is made default.
+            /*
             if (templateName.Text == "")
             {
                 templateName.Text = "ProjectApp";
+            } */
+        }
+
+        private void onButtonClickCreateProject(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as NewProject; // a data context meant for this control
+            var projectPath = vm.createNewProject(templatesListBox.SelectedItem as GameTemplate);
+            bool dialogResult = false;
+            var win = Window.GetWindow(this);
+
+            if (!string.IsNullOrEmpty(projectPath) )
+            {
+                dialogResult = true;
             }
+
+            win.DialogResult = dialogResult;
+            win.Close();
         }
     }
 }

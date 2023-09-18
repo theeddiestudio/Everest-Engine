@@ -1,6 +1,7 @@
 ﻿using EverestEditor.ProjectBrowser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace EverestEditor
         public MainWindow()
         {
             InitializeComponent();
+            createDocuments();
             Loaded += MainWindow_Loaded; // load the function when the window is loaded
         }
 
@@ -44,5 +46,18 @@ namespace EverestEditor
                 // import the project newly created or existing ones
             }
         }
+
+        private void createDocuments()
+        {
+            // create the required documents folder
+            string m_documentPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\The Eddie Studio\Everest Projects";
+            if (!Directory.Exists(m_documentPath))
+            {
+                Directory.CreateDirectory(m_documentPath);
+            }
+        }
+        
+        
+
     }
 }

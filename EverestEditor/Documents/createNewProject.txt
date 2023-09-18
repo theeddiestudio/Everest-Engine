@@ -1,0 +1,41 @@
+public string createNewProject(GameTemplate template) // returns path of created project
+        {
+            if (!checkValidationData())
+            {
+                return string.Empty;
+            }
+
+            if (!Path.EndsInDirectorySeparator(ProjectPath)) ProjectPath += @"\";
+            string m_path = $@"{ProjectPath}{ProjectName}\";
+
+            try
+            {
+                if (!Directory.Exists(m_path)) Directory.CreateDirectory(m_path);
+                
+                foreach (var folder in template.Folders)
+                {
+                    Directory.CreateDirectory(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(m_path) , folder)));
+                }
+
+                // hide the folder meant to be hidden i.e. '.Everest'
+                var dirInfo = new DirectoryInfo(m_path + @"\.Everest\");
+                dirInfo.Attributes |= FileAttributes.Hidden; //hides the folder
+
+                // copy the icon and splash file to .Everest directory
+                File.Copy(template.IconPath, Path.GetFullPath(Path.Combine(dirInfo.FullName, "icon.png")));
+                File.Copy(template.SplashPath, Path.GetFullPath(Path.Combine(dirInfo.FullName, "splash.png")));
+
+                // create the project
+                Project m_project = new Project(ProjectName, m_path);
+                Serializer.ToFile(m_project, m_path + $"{ProjectName}" + Project.Extension);
+                return m_path;
+            }
+            catch (Exception m_exception)
+            {
+                Debug.Write(m_exception.Message);
+                // TODO - make a better log error system
+                return String.Empty;
+            }
+        }
+
+// inside NewProject.cs as a method of NewProject Class

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
@@ -35,6 +36,7 @@ namespace EverestEditor.Utilities
                 using var newFileStream = new FileStream(path, FileMode.Open);
                 Debug.WriteLine(newFileStream);
                 var serializer = new DataContractSerializer(typeof(T));
+                var serializerJSON = new DataContractJsonSerializer(typeof(T)); // didnot work
                 T instance = (T) serializer.ReadObject(newFileStream);
                 return instance;
             }
